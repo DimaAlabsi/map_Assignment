@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.2",
+    "axios": "^1.2.2",
+    "dotenv": "^16.0.3",
+    "next": "12.2.5",
+    "ol": "7.2.2",
+    "react": "18.2.0",
+    "react-datetime-picker": "^4.1.1",
+    "react-dom": "18.2.0",
+    "react-toastify": "^9.1.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.9",
+    "eslint": "8.22.0",
+    "eslint-config-next": "12.2.5",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.2.3"
+  }
+}
