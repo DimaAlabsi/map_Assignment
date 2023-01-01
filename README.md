@@ -2,7 +2,7 @@
  ## Author: Dima Alabsi
 
 
-## a web application that allows users to search for a specified city on a map
+## responsive web application that allows users to search for a specified city on a map
 
 ### Dependencies:  
 
