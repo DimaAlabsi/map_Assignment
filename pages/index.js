@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../components/Header";
 import BaseMap from "../components/BaseMap";
@@ -17,7 +17,8 @@ export default function Home() {
   const [cityName, setCityName] = useState("");
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
-  const [staticMap, setStaticMap] = useState("");
+  const [staticMap, setStaticMap] = useState(null);
+  const [showStaticMap, setShowStaticMap] = useState(false);
   async function getLocation(e) {
     e.preventDefault();
     setLoading(true);
@@ -27,17 +28,19 @@ export default function Home() {
       );
       setLat(resp.data[0].lat);
       setLon(resp.data[0].lon);
-      setStaticMap(
-        `https://maps.locationiq.com/v2/staticmap?key=${process.env.NEXT_APP_LOCATIONIQ_API_KEY}&center=${lat},${lon}&zoom=20&size=1200x400&format=png&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`
-      );
-
       setLoading(false);
+      setShowStaticMap(true);
       successToast("Success processing");
     } catch (err) {
       errorToast(err.message ? err.message : "Not valid location");
       setLoading(false);
     }
   }
+  useEffect(() => {
+    setStaticMap(
+      `https://maps.locationiq.com/v2/staticmap?key=${process.env.NEXT_APP_LOCATIONIQ_API_KEY}&center=${lat},${lon}&zoom=20&size=1200x400&format=png&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>`
+    );
+  }, [lon, lat]);
 
   return (
     <>
@@ -73,7 +76,7 @@ export default function Home() {
           <div className="  mb-9 ">
             <SearchBar handleSubmit={getLocation} setCityName={setCityName} />
           </div>
-          {staticMap ? (
+          {staticMap && showStaticMap ? (
             <div>
               <StaticMap imgURL={staticMap} title={cityName} />
               <button
