@@ -19,6 +19,7 @@ export default function Home() {
   const [lon, setLon] = useState("");
   const [staticMap, setStaticMap] = useState(null);
   const [showStaticMap, setShowStaticMap] = useState(false);
+
   async function getLocation(e) {
     e.preventDefault();
     setLoading(true);
@@ -45,7 +46,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Location Map Service</title>
+        <title>Home | Location Map Service</title>
         <meta
           name="title"
           property="og:title"
@@ -76,6 +77,9 @@ export default function Home() {
           <div className="  mb-9 ">
             <SearchBar handleSubmit={getLocation} setCityName={setCityName} />
           </div>
+
+          <a className=" my-2 font-[400]" href="google-map">click to search using google map</a>
+          {/* first solution  */}
           {staticMap && showStaticMap ? (
             <div>
               <StaticMap imgURL={staticMap} title={cityName} />
